@@ -27,7 +27,7 @@ angles_normalized = (angles + np.pi) / (2 * np.pi)
 
 # Parameters for customization
 num_isoclines = 5  # Number of non-main isoclines
-hue_shift = 0.2    # Amount of hue shift (0 to 1)
+hue_shift = 0.0    # Amount of hue shift (0 to 1)
 
 # Apply hue shift
 angles_shifted = (angles_normalized + hue_shift) % 1  # Shift hue
@@ -52,7 +52,7 @@ levels = np.linspace(Z.min(), Z.max(), num_isoclines)
 
 # Add level for horizontal direction (slope = 0) and sort levels
 if 0 not in levels:
-    levels = np.append(levels, 0)
+    levels = np.append(levels, 0) #нулевая изоклина если уже не добавлена
 levels = np.sort(levels)
 
 # Plot contour lines including the manually added levels
