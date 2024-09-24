@@ -33,7 +33,7 @@ hue_shift = 0.0    # Amount of hue shift (0 to 1)
 angles_shifted = (angles_normalized + hue_shift) % 1  # Shift hue
 
 # Create the plot
-plt.figure(figsize=(8, 8))
+fig, ax = plt.subplots(figsize=(10, 10))  # Set a large square figure
 
 # Use a colormap
 cmap = plt.get_cmap('hsv')
@@ -42,7 +42,7 @@ cmap = plt.get_cmap('hsv')
 quiver = plt.quiver(X, Y, U2, V2, angles_shifted, angles="xy", scale=None, cmap=cmap)
 
 # Add color bar for the angle coloring
-plt.colorbar(quiver, label="Direction (angle in radians)")
+plt.colorbar(quiver, label="Direction (normalized)")
 
 # Add isoclines for horizontal (slope = 0) and vertical (slope -> infinity)
 Z = V2 / U2  # Calculate the slope at each point
@@ -59,7 +59,13 @@ levels = np.sort(levels)
 contours = plt.contour(X, Y, Z, levels=levels, colors='black')
 plt.clabel(contours, inline=True, fontsize=8)
 
-plt.title("Slope Field with Customizable Isoclines")
+# Set equal aspect ratio
+ax.set_aspect('equal', adjustable='box')
+
+# Tight layout to make the plot as large as possible
+plt.tight_layout()
+
+plt.title("Slope Field with Isoclines")
 plt.xlabel("x")
 plt.ylabel("y")
 plt.grid(True)
